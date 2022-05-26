@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    
+    <h1><%=Keyword%></h1>
+
+    <%  for(var i=0;i<tweet_list.length;i++) { %>
+
+      <li> <%= tweet_list[i] %></li>
+
+    <% } %>
+
+    <form class="" action="/" method="get">
+      <button type="submit" name="button">Home</button>
+    </form>
+  </body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Hello</title>
+  <script src="https://js.api.here.com/v3/3.1/mapsjs-core.js" type="text/javascript" charset="utf-8"></script>
+<script src="https://js.api.here.com/v3/3.1/mapsjs-service.js" type="text/javascript" charset="utf-8"></script>
+
+
+
+<meta name="viewport" content="initial-scale=1.0,width=device-width" />
+
+       <script src="https://js.api.here.com/v3/3.1/mapsjs-ui.js" type="text/javascript" charset="utf-8"></script>
+       <link rel="stylesheet" type="text/css" href="https://js.api.here.com/v3/3.1/mapsjs-ui.css" />
+       <script src="https://js.api.here.com/v3/3.1/mapsjs-clustering.js" type="text/javascript" charset="utf-8"></script>
+       <script src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js"
+              type="text/javascript" charset="utf-8"></script>
+  <style media="screen">
+    #mapContainer {
+      margin: auto;
+      width: 100%;
+      border: 3px solid black;
+      padding: 10px;
+      width: 1000px;
+      height: 800px;
+    }
+    .container {
+  height: 200px;
+  position: relative;
+
+}
+
+.center {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+  </style>
+
+</head>
+
+<body>
+  <div id="mapContainer">
+
+  </div>
+  <div class="container">
+  <div class="center">
+    <form class="" action="/" method="get">
+      <button style=""type="submit" name="button">Home</button>
+    </form>
+  </div>
+</div>
+  <div class="home_button">
+
+  </div>
+
+<script type="text/javascript">
+
+  var latitudes = <%-JSON.stringify(Lat)%>;
+  var longitudes = <%-JSON.stringify(Long)%>;
+// var coordinates = [{lat:48.8567, lng:2.3508},{lat:41.9, lng: 12.5},{lat:52.5166, lng:13.3833}]
+
+
+  function addMarkersToMap(map) {
+
+    for(let i in latitudes){
+      var Marker = new H.map.Marker({lat:latitudes[i], lng:longitudes[i]});
+      map.addObject(Marker);
+
+    }
+
+
+
+}
+    var platform = new H.service.Platform({
+      'apikey': 'jO9nYHc--TUTA8dwdtboofJN8coxSRXI4GBpdxAu73I'
+    });
+
+    // Obtain the default map types from the platform object
+    var maptypes = platform.createDefaultLayers();
+
+    // Instantiate (and display) the map
+    var map = new H.Map(document.getElementById('mapContainer'),
+      maptypes.vector.normal.map,
+      {
+        zoom: 1,
+        center: { lng: 13.4, lat: 52.51 },
+        pixelRatio: window.devicePixelRatio || 1
+      });
+      // Create a map:
+
+      window.addEventListener('resize', () => map.getViewPort().resize());
+      var behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
+      var ui = H.ui.UI.createDefault(map, maptypes);
+
+
+
+      window.onload = function () {
+   addMarkersToMap(map);
+ }
+
+</script>
+</body>
+
+
+
+
+</html>
