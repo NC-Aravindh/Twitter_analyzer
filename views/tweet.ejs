@@ -2,20 +2,39 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <link rel="stylesheet" href="style.css">
+    <title>Tweets</title>
   </head>
   <body>
-    
-    <h1><%=Keyword%></h1>
+    <div class="wrapper fadeInDown">
+      <div id="formContent1">
 
-    <%  for(var i=0;i<tweet_list.length;i++) { %>
+    <h1 style="color:white"><%=Keyword%></h1>
+<ul>
 
-      <li> <%= tweet_list[i] %></li>
+  <%  for(var i=0;i<tweet_list.length;i++) { %>
 
-    <% } %>
+    <li style="color:white"> <%= tweet_list[i] %></li><br>
 
-    <form class="" action="/" method="get">
-      <button type="submit" name="button">Home</button>
-    </form>
+  <% } %>
+
+</ul>
+
+<form class="" action="/" method="get">
+  <button style=""type="submit" name="button">Home</button>
+</form>
+
+</div>
+
+</div>
+<div class="container">
+<div class="center">
+
+</div>
+</div>
+<!-- <script type="text/javascript">
+var latitudes = <%-JSON.stringify(tweet_list)%>;
+  console.log(latitudes)
+</script> -->
   </body>
 </html>
