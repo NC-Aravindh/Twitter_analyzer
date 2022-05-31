@@ -33,7 +33,7 @@ const geocoder = NodeGeocoder(options)
 dotenv.config({ path: './config/config.env'})
 
 // Connecting to mongodb
-mongoose.connect('mongodb://localhost:27017/twit1db', {useNewUrlParser: true,useUnifiedTopology: true});
+mongoose.connect('mongodb://localhost:27017/twit2db', {useNewUrlParser: true,useUnifiedTopology: true});
 
 const Dataschema = new mongoose.Schema({
   keyword: String,
@@ -63,7 +63,7 @@ app.get("/",function(req,res){
 
 
 
-
+// Tweet route
 app.post("/tweet",async function(req,res){
 
 var tweets = []
@@ -82,7 +82,7 @@ var tweets = []
 
 
 
-
+// Geomap route
 app.post("/map",async function(req,res){
 
   var latitude = []
@@ -103,7 +103,7 @@ app.post("/map",async function(req,res){
 })
 
 
-
+// Linear Chart route
 app.post("/chart",async function(req,res){
 
   var line_points = []
@@ -124,7 +124,7 @@ app.post("/chart",async function(req,res){
 
 
 
-
+// add the data to the database
 app.post("/database",function(req,res){
 
     var location_address = []
@@ -133,12 +133,12 @@ app.post("/database",function(req,res){
 
     var key = req.body.Key;
     var no_of_tweets = req.body.limit;
-
+    // console.log("ulle")
 
 // fetaching the tweets from twitter based on the keyword and the no. of tweets
     T.get("search/tweets",{q:key,count:no_of_tweets} ,function(err,data,response){
 
-       // console.log(data)
+
       for (let i = 0; i < no_of_tweets; i++) {
               var location = data.statuses[i]?.user['location']
               var tweet = data.statuses[i]?.text
@@ -147,8 +147,11 @@ app.post("/database",function(req,res){
               location_address.push(location)
               tweets.push(tweet)
               line_data.push(retweet_count)
+
+
             }
-            
+
+
             location_address = (location_address.filter(x => x));
 
           location_address.forEach(function(currentValue, index, arr){
@@ -160,16 +163,16 @@ app.post("/database",function(req,res){
                const add_tweet = new Tweet({keyword:key,tweet:tweets[index],latitude:res1[0]?.latitude,longitude:res1[0]?.longitude,retweet_count:line_data[index]})
                add_tweet.save();
 
-               // latitude.push(res1[0]?.latitude);
-               // longitude.push(res1[0]?.longitude);
+
 
              })
           })
 
 
       })
- res.redirect("/");//
+ res.redirect("/");
 })
+
 
 app.listen(3000,function(){
 

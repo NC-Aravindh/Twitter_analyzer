@@ -3,7 +3,8 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Hello</title>
+  <link rel="stylesheet" href="style.css">
+  <title>Geomap</title>
   <script src="https://js.api.here.com/v3/3.1/mapsjs-core.js" type="text/javascript" charset="utf-8"></script>
 <script src="https://js.api.here.com/v3/3.1/mapsjs-service.js" type="text/javascript" charset="utf-8"></script>
 
@@ -25,19 +26,19 @@
       width: 1000px;
       height: 800px;
     }
-    .container {
+    /* .container {
   height: 200px;
   position: relative;
 
-}
+} */
 
 .center {
   margin: 0;
   position: absolute;
-  top: 50%;
-  left: 50%;
-  -ms-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
+  top: 3%;
+  left: 40%;
+  /* -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%); */
 }
   </style>
 
@@ -54,9 +55,6 @@
     </form>
   </div>
 </div>
-  <div class="home_button">
-
-  </div>
 
 <script type="text/javascript">
 
@@ -64,18 +62,17 @@
   var longitudes = <%-JSON.stringify(Long)%>;
 // var coordinates = [{lat:48.8567, lng:2.3508},{lat:41.9, lng: 12.5},{lat:52.5166, lng:13.3833}]
 
-
   function addMarkersToMap(map) {
 
     for(let i in latitudes){
       var Marker = new H.map.Marker({lat:latitudes[i], lng:longitudes[i]});
       map.addObject(Marker);
-
-    }
+          }
 
 
 
 }
+
     var platform = new H.service.Platform({
       'apikey': 'jO9nYHc--TUTA8dwdtboofJN8coxSRXI4GBpdxAu73I'
     });
